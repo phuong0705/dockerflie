@@ -12,7 +12,11 @@ RUN mkdir -p /var/opt/mssql \
 ENV HOME=/var/opt/mssql
 ENV ACCEPT_EULA=Y
 ENV MSSQL_PID=Developer
+ENV MSSQL_MEMORY_LIMIT_MB=512
+ENV MSSQL_DATA_DIR=/var/opt/mssql/data
+ENV MSSQL_LOG_DIR=/var/opt/mssql/log
+ENV MSSQL_BACKUP_DIR=/var/opt/mssql/backup
 
 WORKDIR /var/opt/mssql
 
-CMD ["/opt/mssql/bin/sqlservr"]
+CMD ["/bin/bash", "-lc", "cd /var/opt/mssql && exec /opt/mssql/bin/sqlservr"]
